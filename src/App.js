@@ -84,35 +84,107 @@ class App extends Component {
   render() {
     let postData = this.state.postData;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          {/* <h1 className="App-title">Welcome to React</h1> */}
+      <div className="container App">
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h1>{this.state.title}</h1>
-        </header>
         <p className="App-intro">
           Simple CRUD App using react
         </p>
-
-        {/* FORM */}
-        <form ref="appForm" className="appForm">
-          <input type="text" ref="userId" placeholder="your ID" className="formField" />
-          <input type="text" ref="title" placeholder="your post title..." className="formField" /> <br />
-          <input type="text" ref="body" placeholder="your post body..." className="formField" />
-          <button onClick={this.funcSubmitPost} className="submitButton"> Post </button>
+        <form ref="appForm">
+          <div className="col-md-12">
+            <div className="row">
+              <div className="row">
+                <div className="col-md-3">
+                </div>
+                <div className="col-md-6">
+                <h4 > Add Post </h4>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <input type="text" ref="userId" className="form-control" placeholder="your Id" />
+                    </div>
+                    <div className="col-md-6">
+                      <input type="text" ref="title" className="form-control" placeholder="title..." />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                </div>
+              </div>
+              <br />
+              <div className="row">
+                <div className="col-md-3">
+                </div>
+                <div className="col-md-6">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <input type="text" ref="body" className="form-control" placeholder="your post body..." />
+                      <br />
+                      <button onClick={this.funcSubmitPost} className="submitButton btn btn-success btn-block"> Post </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
-        <pre>
+        
+
+        <br />
+        <div className="col-md-12">
+          <h3>Posts</h3>
+          {/* COL-3 */}
+          <div className="col-md-3">
+          </div>
+          {/* COL-3 END */}
+
+          <div className="col-md-6">
+            {postData.reverse().map((dt, id) => 
+              <div key={id} className="row thumbnail"> 
+                <li className="appList caption list-none">
+                  <button type="button" className="btn btn-primary">
+                    <i className="glyphicon glyphicon-user"></i> User {dt.userId}
+                  </button>
+                  {/* [{id}].{dt.userId}, {dt.title} */}
+                  <h3> {dt.title} </h3>
+                  {/* <br /> */}
+                  <div className="btn-group">
+                    <button onClick={() => this.funcEditPost(id)} className="editButton btn btn-warning"> 
+                      <i class="glyphicon glyphicon-pencil"></i> Edit 
+                    </button> 
+                    <button onClick={() => this.funcRemovePost(id)} className="removeButton btn btn-danger"> 
+                      <i class="glyphicon glyphicon-trash"></i>Remove 
+                    </button>
+                  </div>
+                  <br />
+                  <div className="caption text-center">
+                    {dt.body}
+                  </div>
+                </li>
+              </div>
+            )}
+          </div>
+
+          {/* COL-3 */}
+          <div className="col-md-3">
+          </div>
+          {/* COL-3 END */}
+        </div>
+          
+        {/* <pre>
           {postData.reverse().map((dt, id) => 
             <div key={id} > 
               <li className="appList">
                 [{id}].{dt.userId}, {dt.title}
+                <Button bsStyle='success'>Hello</Button>
                 <button onClick={() => this.funcRemovePost(id)} className="removeButton"> Remove </button>
                 <button onClick={() => this.funcEditPost(id)} className="editButton"> Edit </button> <br />
                 {dt.body}
               </li>
             </div>
           )}
-        </pre>
+        </pre> */}
       </div>
     );
   }
