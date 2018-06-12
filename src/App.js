@@ -90,43 +90,46 @@ class App extends Component {
         <p className="App-intro">
           Simple CRUD App using react
         </p>
-        <div className="col-md-12">
-          <div className="row">
+        <form ref="appForm">
+          <div className="col-md-12">
             <div className="row">
-              <div className="col-md-3">
-              </div>
-              <div className="col-md-6">
-              <h4 > Add Post </h4>
-                <div className="row">
-                  <div className="col-md-6">
-                    <input type="text" ref="userId" className="form-control" placeholder="your Id" />
-                  </div>
-                  <div className="col-md-6">
-                    <input type="text" ref="title" className="form-control" placeholder="title..." />
+              <div className="row">
+                <div className="col-md-3">
+                </div>
+                <div className="col-md-6">
+                <h4 > Add Post </h4>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <input type="text" ref="userId" className="form-control" placeholder="your Id" />
+                    </div>
+                    <div className="col-md-6">
+                      <input type="text" ref="title" className="form-control" placeholder="title..." />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-md-3">
-              </div>
-            </div>
-            <br />
-            <div className="row">
-              <div className="col-md-3">
-              </div>
-              <div className="col-md-6">
-                <div className="row">
-                  <div className="col-md-12">
-                    <input type="text" ref="body" className="form-control" placeholder="your post body..." />
-                    <br />
-                    <button onClick={this.funcSubmitPost} className="submitButton btn btn-success btn-block"> Post </button>
-                  </div>
+                <div className="col-md-3">
                 </div>
               </div>
-              <div className="col-md-3">
+              <br />
+              <div className="row">
+                <div className="col-md-3">
+                </div>
+                <div className="col-md-6">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <input type="text" ref="body" className="form-control" placeholder="your post body..." />
+                      <br />
+                      <button onClick={this.funcSubmitPost} className="submitButton btn btn-success btn-block"> Post </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
+        
 
         <br />
         <div className="col-md-12">
