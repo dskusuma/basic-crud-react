@@ -43,6 +43,7 @@ class App extends Component {
       postData: currentData
     })
   }
+  
   render() {
     let postData = this.state.postData;
     return (
