@@ -22,14 +22,21 @@ class App extends Component {
     let userID = this.refs.userID.value;
     let userPost = this.refs.userPost.value;
 
-    let currentData = {
-      userID, userPost
+    if(this.state.act === 0) {
+      let currentData = {
+        userID, userPost
+      }
+      postData.push(currentData);
+    }else{
+      let index = this.state.index;
+      postData[index].userID = userID;
+      postData[index].userPost = userPost;
     }
-
-    postData.push(currentData);
+    
 
     this.setState({
-      postData: postData
+      postData: postData,
+      index: 0
     })
 
     this.refs.appForm.reset();
@@ -43,7 +50,19 @@ class App extends Component {
       postData: currentData
     })
   }
-  
+
+  funcEditPost = (key_i) => {
+    let currentData = this.state.postData[key_i];
+    this.refs.userID.value = currentData.userID;
+    this.refs.userPost.value = currentData.userPost;
+
+    this.setState({
+      act: 1,
+      index: key_i,
+    })
+
+    this.refs.userID.focus();
+  }
   render() {
     let postData = this.state.postData;
     return (
