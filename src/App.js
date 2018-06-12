@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
 
-class App extends Component {
+// URL : https://jsonplaceholder.typicode.com/posts
 
+class App extends Component {
+ 
   constructor(props){
     super(props);
     this.state={
@@ -19,20 +22,21 @@ class App extends Component {
     console.log('try');
 
     let postData = this.state.postData;
-    let userID = this.refs.userID.value;
-    let userPost = this.refs.userPost.value;
+    let userId = this.refs.userId.value;
+    let title = this.refs.title.value;
+    let body = this.refs.body.value;
 
     if(this.state.act === 0) {
       let currentData = {
-        userID, userPost
+        userId, title,body
       }
       postData.push(currentData);
     }else{
       let index = this.state.index;
-      postData[index].userID = userID;
-      postData[index].userPost = userPost;
+      postData[index].userId = userId;
+      postData[index].title = title;
+      postData[index].body = body;
     }
-    
 
     this.setState({
       postData: postData,
@@ -43,25 +47,39 @@ class App extends Component {
 
   }
 
-  funcRemovePost = (key_i) => {
+  funcRemovePost = (id) => {
     let currentData = this.state.postData;
-    currentData.splice(key_i,1);
+    currentData.splice(id,1);
     this.setState({
       postData: currentData
     })
   }
 
-  funcEditPost = (key_i) => {
-    let currentData = this.state.postData[key_i];
-    this.refs.userID.value = currentData.userID;
-    this.refs.userPost.value = currentData.userPost;
+  funcEditPost = (id) => {
+    let currentData = this.state.postData[id];
+    this.refs.userId.value = currentData.userId;
+    this.refs.title.value = currentData.title;
+    this.refs.body.value = currentData.body;
 
     this.setState({
       act: 1,
-      index: key_i,
+      index: id,
     })
 
-    this.refs.userID.focus();
+    this.refs.userId.focus();
+  }
+
+  funcFetchData  = () => {
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then((res) => {
+        console.log("Status Fetch Data : " + res.status);
+        console.log(res.data);
+        this.setState({postData: res.data});
+      })
+  }
+
+  componentDidMount() {
+    this.funcFetchData();
   }
   render() {
     let postData = this.state.postData;
@@ -78,17 +96,21 @@ class App extends Component {
 
         {/* FORM */}
         <form ref="appForm" className="appForm">
-          <input type="text" ref="userID" placeholder="your ID" className="formField" />
-          <input type="text" ref="userPost" placeholder="What do you think..." className="formField" />
+          <input type="text" ref="userId" placeholder="your ID" className="formField" />
+          <input type="text" ref="title" placeholder="your post title..." className="formField" /> <br />
+          <input type="text" ref="body" placeholder="your post body..." className="formField" />
           <button onClick={this.funcSubmitPost} className="submitButton"> Post </button>
         </form>
         <pre>
-          {postData.map((dt, key_i) => 
-            <li key={key_i} className="appList">
-              {key_i+1}.{dt.userID}, {dt.userPost}
-              <button onClick={() => this.funcRemovePost(key_i)} className="removeButton"> Remove </button>
-              <button onClick={() => this.funcEditPost(key_i)} className="editButton"> Edit </button>
-            </li>
+          {postData.reverse().map((dt, id) => 
+            <div key={id} > 
+              <li className="appList">
+                [{id}].{dt.userId}, {dt.title}
+                <button onClick={() => this.funcRemovePost(id)} className="removeButton"> Remove </button>
+                <button onClick={() => this.funcEditPost(id)} className="editButton"> Edit </button> <br />
+                {dt.body}
+              </li>
+            </div>
           )}
         </pre>
       </div>
