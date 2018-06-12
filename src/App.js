@@ -84,15 +84,51 @@ class App extends Component {
   render() {
     let postData = this.state.postData;
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className="container App">
           <img src={logo} className="App-logo" alt="logo" />
-          {/* <h1 className="App-title">Welcome to React</h1> */}
           <h1>{this.state.title}</h1>
-        </header>
         <p className="App-intro">
           Simple CRUD App using react
         </p>
+        <div className="col-md-12">
+          <div className="row">
+            <div className="row">
+              <div className="col-md-3">
+              </div>
+              <div className="col-md-6">
+              <h4 > Add Post </h4>
+                <div className="row">
+                  <div className="col-md-6">
+                    <input type="text" ref="userId" className="form-control" placeholder="your Id" />
+                  </div>
+                  <div className="col-md-6">
+                    <input type="text" ref="title" className="form-control" placeholder="title..." />
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+              </div>
+            </div>
+            <br />
+            <div className="row">
+              <div className="col-md-3">
+              </div>
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-md-12">
+                    <input type="text" ref="body" className="form-control" placeholder="your post body..." />
+                    <br />
+                    <button onClick={this.funcSubmitPost} className="submitButton btn btn-success btn-block"> Post </button>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
 
         {/* FORM */}
         <form ref="appForm" className="appForm">
@@ -101,18 +137,30 @@ class App extends Component {
           <input type="text" ref="body" placeholder="your post body..." className="formField" />
           <button onClick={this.funcSubmitPost} className="submitButton"> Post </button>
         </form>
-        <pre>
+          {/* {postData.reverse().map((dt, id) => 
+            <div key={id} className=""> 
+              <li className="appList">
+                [{id}].{dt.userId}, {dt.title}
+                <h3> {dt.userId} | {dt.title} </h3>
+                <button onClick={() => this.funcRemovePost(id)} className="removeButton"> Remove </button>
+                <button onClick={() => this.funcEditPost(id)} className="editButton"> Edit </button> <br />
+                {dt.body}
+              </li>
+            </div>
+          )} */}
+        {/* <pre>
           {postData.reverse().map((dt, id) => 
             <div key={id} > 
               <li className="appList">
                 [{id}].{dt.userId}, {dt.title}
+                <Button bsStyle='success'>Hello</Button>
                 <button onClick={() => this.funcRemovePost(id)} className="removeButton"> Remove </button>
                 <button onClick={() => this.funcEditPost(id)} className="editButton"> Edit </button> <br />
                 {dt.body}
               </li>
             </div>
           )}
-        </pre>
+        </pre> */}
       </div>
     );
   }
