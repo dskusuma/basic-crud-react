@@ -85,7 +85,7 @@ class App extends Component {
     let postData = this.state.postData;
     return (
       <div className="container App">
-          <img src={logo} className="App-logo" alt="logo" />
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h1>{this.state.title}</h1>
         <p className="App-intro">
           Simple CRUD App using react
@@ -126,28 +126,49 @@ class App extends Component {
               </div>
             </div>
           </div>
-          
         </div>
-        
 
-        {/* FORM */}
-        <form ref="appForm" className="appForm">
-          <input type="text" ref="userId" placeholder="your ID" className="formField" />
-          <input type="text" ref="title" placeholder="your post title..." className="formField" /> <br />
-          <input type="text" ref="body" placeholder="your post body..." className="formField" />
-          <button onClick={this.funcSubmitPost} className="submitButton"> Post </button>
-        </form>
-          {/* {postData.reverse().map((dt, id) => 
-            <div key={id} className=""> 
-              <li className="appList">
-                [{id}].{dt.userId}, {dt.title}
-                <h3> {dt.userId} | {dt.title} </h3>
-                <button onClick={() => this.funcRemovePost(id)} className="removeButton"> Remove </button>
-                <button onClick={() => this.funcEditPost(id)} className="editButton"> Edit </button> <br />
-                {dt.body}
-              </li>
-            </div>
-          )} */}
+        <br />
+        <div className="col-md-12">
+          <h3>Posts</h3>
+          {/* COL-3 */}
+          <div className="col-md-3">
+          </div>
+          {/* COL-3 END */}
+
+          <div className="col-md-6">
+            {postData.reverse().map((dt, id) => 
+              <div key={id} className="row thumbnail"> 
+                <li className="appList caption list-none">
+                  <button type="button" className="btn btn-primary">
+                    <i className="glyphicon glyphicon-user"></i> User {dt.userId}
+                  </button>
+                  {/* [{id}].{dt.userId}, {dt.title} */}
+                  <h3> {dt.title} </h3>
+                  {/* <br /> */}
+                  <div className="btn-group">
+                    <button onClick={() => this.funcEditPost(id)} className="editButton btn btn-warning"> 
+                      <i class="glyphicon glyphicon-pencil"></i> Edit 
+                    </button> 
+                    <button onClick={() => this.funcRemovePost(id)} className="removeButton btn btn-danger"> 
+                      <i class="glyphicon glyphicon-trash"></i>Remove 
+                    </button>
+                  </div>
+                  <br />
+                  <div className="caption text-center">
+                    {dt.body}
+                  </div>
+                </li>
+              </div>
+            )}
+          </div>
+
+          {/* COL-3 */}
+          <div className="col-md-3">
+          </div>
+          {/* COL-3 END */}
+        </div>
+          
         {/* <pre>
           {postData.reverse().map((dt, id) => 
             <div key={id} > 
